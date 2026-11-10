@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Budget Friendly — Furniture picked for your theme and budget</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fffaf6;--fg:#241f3a;--mute:#6a6580;--line:#e2dbef;--card:#f1ecfb;--accent:#6c5ce7;--p1:#e6defa;--p2:#d5f2e5;--p3:#ffe3d3;--p4:#d8ecfb;--p5:#fff1bf;--p6:#fcdbe8;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17142a;--fg:#f4f0ff;--mute:#a9a3c4;--line:#3a3560;--card:#221e3d;--p1:#3a3166;--p2:#1f4a3d;--p3:#5a3a2c;--p4:#25455f;--p5:#5a4d1f;--p6:#5a2a40;color-scheme:dark}}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background-color:var(--bg);background-image:radial-gradient(circle at 92% 0,var(--p1),transparent 45%),radial-gradient(circle at 0 18%,var(--p3),transparent 40%),radial-gradient(circle at 70% 40%,var(--p2),transparent 35%);background-size:100% 1000px;background-repeat:no-repeat;color:var(--fg);font-family:Manrope,system-ui,sans-serif;line-height:1.5}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+header{padding:28px 0;border-bottom:1px solid var(--line);font-weight:700;letter-spacing:.02em}
+h1{font-weight:300;font-size:clamp(2.4rem,7vw,4.8rem);line-height:1.02;letter-spacing:-.03em;margin:56px 0 16px;max-width:14ch}
+.lead{color:var(--mute);max-width:46ch;margin:0 0 40px}
+form{display:grid;gap:22px;max-width:640px;margin-bottom:72px}
+label{font-weight:500;font-size:.95rem;display:block;margin-bottom:8px}
+small{color:var(--mute);font-weight:400}
+textarea,input[type=number],select{width:100%;font:inherit;color:var(--fg);background:var(--card);border:2px solid var(--line);border-radius:14px;padding:14px}
+textarea{min-height:110px;resize:vertical}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:560px){.row{grid-template-columns:1fr}}
+:focus-visible{outline:3px solid var(--fg);outline-offset:3px}
+button{font:inherit;cursor:pointer;border-radius:0}
+.go{background:var(--accent);color:#fff;border:0;border-radius:99px;padding:16px 32px;font-weight:700;justify-self:start}
+.go:hover{opacity:.85}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chips button{background:var(--p1);color:var(--fg);border:0;border-radius:99px;padding:8px 14px;font-size:.85rem}
+.chips button:nth-child(3n+2){background:var(--p2)}
+.chips button:nth-child(3n){background:var(--p3)}
+.chips button:hover{filter:brightness(.94)}
+#results{display:none;padding-bottom:140px}
+#results h2{font-weight:300;font-size:2rem;letter-spacing:-.02em;margin:0 0 6px}
+.note{color:var(--mute);margin:0 0 36px}
+.cat{margin-bottom:48px}
+.cat h3{font-size:1rem;font-weight:700;border-top:3px solid var(--accent);padding-top:12px;margin:0 0 16px;display:flex;justify-content:space-between}
+.cat:nth-child(3n+2) h3{border-color:#ff9f7a}
+.cat:nth-child(3n) h3{border-color:#3fbf93}
+.cat h3 span{font-weight:400;color:var(--mute)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+.item{border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;transition:opacity .2s,border-color .2s}
+.item.liked{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent)}
+.item.passed{opacity:.35}
+.pic{background:var(--card);padding:22px;display:grid;place-items:center;aspect-ratio:10/7}
+.pic svg{width:80%;height:auto;stroke:var(--fg);fill:none;stroke-width:2;stroke-linejoin:round}
+.info{padding:14px;flex:1}
+.info b{display:block;font-weight:500}
+.price{font-size:1.1rem;margin-top:2px}
+.tags{color:var(--mute);font-size:.8rem;margin-top:4px}
+.acts{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line)}
+.acts button{background:transparent;color:var(--fg);border:0;padding:12px;font-weight:500}
+.acts button+button{border-left:1px solid var(--line)}
+.acts button:hover{background:var(--card)}
+.acts button[aria-pressed=true]{background:var(--accent);color:#fff}
+.acts button+button[aria-pressed=true]{background:#6a6580}
+.store{border-top:1px solid var(--line);padding:10px 14px;font-size:.8rem;color:var(--mute)}
+.store a{color:var(--fg);margin-right:10px;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+.store a:hover{text-decoration-thickness:2px}
+.nrow input+input{margin-top:6px}
+.nrow small{display:block;margin-top:6px;font-size:.75rem}
+.nrow{padding:10px 14px;border-top:1px solid var(--line);background:var(--card)}
+.nrow input{width:100%;font:inherit;font-size:.85rem;color:var(--fg);background:var(--bg);border:2px solid var(--line);border-radius:10px;padding:8px 10px}
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--bg);border-top:1px solid var(--line);box-shadow:0 -6px 20px rgba(108,92,231,.12);padding:12px 20px calc(12px + env(safe-area-inset-bottom,0px));display:none;z-index:5}
+.bar .in{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.meter{flex:1;min-width:140px}
+.track{height:8px;background:var(--p1);border-radius:99px;overflow:hidden}
+.fill{height:100%;background:var(--accent);width:0;transition:width .3s}
+.fill.over{background:#ff7a8a}
+.bar button{background:var(--accent);color:#fff;border:0;border-radius:99px;padding:12px 22px;font-weight:700}
+#summary{display:none;border-top:1px solid var(--fg);padding:36px 0 160px}
+#summary h2{font-weight:300;font-size:2rem;letter-spacing:-.02em;margin:0 0 20px}
+.line{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);align-items:center}
+.line button{background:none;border:0;color:var(--mute);text-decoration:underline;padding:4px}
+.total{display:flex;justify-content:space-between;font-size:1.3rem;font-weight:700;padding:18px 0}
+.empty{color:var(--mute)}
+.nav{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{color:var(--fg);text-decoration:none;font-weight:700;font-size:1.15rem}
+nav a{color:var(--fg);text-decoration:none;padding:8px 16px;border-radius:99px;font-weight:500;margin-left:4px}
+nav a[aria-current=page]{background:var(--accent);color:#fff}
+nav a:hover:not([aria-current]){background:var(--p1)}
+a.go{display:inline-block;text-decoration:none}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:40px 0}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:0 0 56px}
+.step{border-radius:18px;padding:24px}
+.step h3{margin:0 0 6px;font-weight:700}
+.step p{margin:0}
+.step:nth-child(1){background:var(--p1)}
+.step:nth-child(2){background:var(--p2)}
+.step:nth-child(3){background:var(--p3)}
+#v-home{padding-bottom:80px}
+body.home .bar{display:none!important}
+</style>
+</head>
+<body>
+<header><div class="wrap nav"><a class="brand" href="#home">Budget Friendly</a><nav aria-label="Main"><a href="#home" id="t-home">Home</a><a href="#design" id="t-design">Design a room</a></nav></div></header>
+<main class="wrap">
+  <section id="v-home">
+    <h1>Furniture that fits your style and your budget.</h1>
+    <p class="lead">Budget Friendly designs your room around the look you describe and the money you want to spend. Browse picks for the living room, bedroom, dining room or home office.</p>
+    <a class="go" href="#design">Start designing</a>
+    <div class="tiles" id="tiles" aria-hidden="true"></div>
+    <div class="steps">
+      <div class="step"><h3>1. Describe your theme</h3><p>Tell us the mood in your own words, like “cozy and rustic” or “sleek and modern.”</p></div>
+      <div class="step"><h3>2. Set your budget</h3><p>Enter the total you want to spend and choose a room.</p></div>
+      <div class="step"><h3>3. Like what you love</h3><p>Like or pass on each piece, then add the store and price to track your budget.</p></div>
+    </div>
+  </section>
+  <div id="v-design" hidden>
+  <h1>Tell us the mood. We’ll furnish the room.</h1>
+  <p class="lead">Describe your theme, set a budget, and pick a room. You’ll get furniture that fits both. Like what you love, pass on the rest.</p>
+
+  <form id="f">
+    <div>
+      <label for="theme">Describe your theme <small>(a few words or a few sentences)</small></label>
+      <textarea id="theme" placeholder="Calm, bright and uncluttered, with light wood and soft textures."></textarea>
+      <div class="chips" id="chips" aria-label="Theme ideas"></div>
+    </div>
+    <div class="row">
+      <div><label for="budget">Total budget (USD)</label><input id="budget" type="number" min="300" step="50" value="3000"></div>
+      <div><label for="room">Room</label>
+        <select id="room"><option value="living">Living room</option><option value="bedroom">Bedroom</option><option value="dining">Dining room</option><option value="office">Home office</option></select>
+      </div>
+    </div>
+    <button class="go" type="submit">Design my room</button>
+  </form>
+
+  <section id="results" aria-live="polite">
+    <h2 id="rt"></h2>
+    <p class="note" id="rn"></p>
+    <div id="cats"></div>
+  </section>
+
+  <section id="summary">
+    <h2>Your picks</h2>
+    <div id="plist"></div>
+  </section>
+  </div>
+</main>
+
+<datalist id="shops"><option value="IKEA"><option value="Wayfair"><option value="West Elm"></datalist>
+<div class="bar" id="bar"><div class="in">
+  <div><b id="bl">0 liked</b></div>
+  <div class="meter"><div class="track"><div class="fill" id="bf"></div></div><small id="bt"></small></div>
+  <button id="vb" type="button">View my picks</button>
+</div></div>
+
+<script>
+const STY={mo:"Modern",mi:"Minimalist",sc:"Scandinavian",in:"Industrial",bo:"Bohemian",ru:"Rustic",lx:"Luxe",mc:"Mid-century",co:"Coastal"};
+const KEY={mo:"modern sleek contemporary clean",mi:"minimal simple calm zen uncluttered neutral",sc:"scandinavian nordic cozy hygge light wood soft",in:"industrial loft metal urban concrete",bo:"boho bohemian eclectic plants earthy colorful texture",ru:"rustic farmhouse cabin warm wood cottage",lx:"luxury luxe elegant glam marble gold classy rich",mc:"mid-century midcentury retro vintage 60s",co:"coastal beach airy ocean breezy bright"};
+const ROOMS={
+ living:{n:"living room",w:{sofa:.34,armchair:.14,coffeetable:.12,rug:.12,lamp:.07,shelf:.12,art:.06}},
+ bedroom:{n:"bedroom",w:{bed:.4,nightstand:.1,dresser:.22,rug:.12,lamp:.06,art:.06}},
+ dining:{n:"dining room",w:{diningtable:.4,diningchair:.3,shelf:.16,lamp:.07,art:.07}},
+ office:{n:"home office",w:{desk:.38,deskchair:.24,shelf:.16,lamp:.08,rug:.14}}
+};
+const CN={sofa:"Sofa",armchair:"Accent chair",coffeetable:"Coffee table",rug:"Rug",lamp:"Lighting",shelf:"Storage",art:"Wall decor",bed:"Bed",nightstand:"Nightstand",dresser:"Dresser",diningtable:"Dining table",diningchair:"Dining chairs",desk:"Desk",deskchair:"Desk chair"};
+// name, category, price, styles
+const D=[
+["Linea 3-Seater","sofa",1450,"mo mi"],["Nordby Linen Sofa","sofa",980,"sc co mi"],["Brixton Leather Sofa","sofa",2100,"in lx mc"],["Moss Bouclé Loveseat","sofa",760,"bo sc"],
+["Arc Accent Chair","armchair",420,"mo mc"],["Cane Lounge Chair","armchair",360,"bo co"],["Halden Wingback","armchair",890,"lx ru"],
+["Slab Marble Table","coffeetable",640,"lx mo mi"],["Oak Round Table","coffeetable",310,"sc mc"],["Forge Steel Table","coffeetable",280,"in mo"],["Plank Pine Table","coffeetable",220,"ru bo"],
+["Mono Wool Rug","rug",380,"mi mo sc"],["Kilim Weave Rug","rug",290,"bo ru"],["Shag Cloud Rug","rug",450,"lx co"],["Grid Jute Rug","rug",180,"co in"],
+["Orb Floor Lamp","lamp",140,"mo mi mc"],["Arc Steel Lamp","lamp",190,"in mo"],["Linen Table Lamp","lamp",70,"sc co ru"],["Brass Tripod Lamp","lamp",230,"lx mc"],
+["Frame Bookcase","shelf",340,"mo mi in"],["Ladder Shelf","shelf",150,"sc bo ru"],["Walnut Sideboard","shelf",780,"mc lx"],
+["Black Line Print Set","art",90,"mo mi"],["Woven Wall Hanging","art",120,"bo co sc"],["Gilded Mirror","art",260,"lx mc"],
+["Slate Platform Bed","bed",890,"mo mi in"],["Birch Frame Bed","bed",640,"sc co mi"],["Velvet Tufted Bed","bed",1300,"lx bo"],["Timber Four-Post Bed","bed",1100,"ru mc"],
+["Float Nightstand","nightstand",130,"mo mi"],["Oak Bedside","nightstand",170,"sc mc ru"],["Mirror Nightstand","nightstand",240,"lx co"],
+["Six-Drawer Matte Dresser","dresser",720,"mo mi sc"],["Reclaimed Chest","dresser",560,"ru in bo"],["Fluted Dresser","dresser",980,"lx mc co"],
+["Pillar Dining Table","diningtable",1100,"mo mi lx"],["Farm Trestle Table","diningtable",780,"ru sc bo"],["Pipe Dining Table","diningtable",650,"in mc co"],
+["Shell Chairs (set of 4)","diningchair",380,"mo sc mc co"],["Leather Sling Chairs (set of 4)","diningchair",520,"lx in mi"],["Spindle Chairs (set of 4)","diningchair",300,"ru bo"],
+["Slim Oak Desk","desk",420,"sc mi mc"],["Steel Frame Desk","desk",360,"in mo"],["Executive Walnut Desk","desk",950,"lx ru mc"],
+["Mesh Task Chair","deskchair",280,"mo mi in"],["Leather Swivel Chair","deskchair",460,"lx mc ru"],["Upholstered Desk Chair","deskchair",220,"sc bo co"]
+].map((a,i)=>({id:i,name:a[0],cat:a[1],price:a[2],st:a[3].split(" ")}));
+
+const ICON={
+sofa:'<rect x="22" y="22" width="76" height="26" rx="5"/><rect x="10" y="32" width="18" height="26" rx="6"/><rect x="92" y="32" width="18" height="26" rx="6"/><path d="M28 58v6M92 58v6"/>',
+armchair:'<rect x="34" y="14" width="52" height="30" rx="8"/><rect x="26" y="34" width="68" height="22" rx="6"/><path d="M34 56l-4 10M86 56l4 10"/>',
+coffeetable:'<rect x="16" y="28" width="88" height="8" rx="2"/><path d="M26 36v28M94 36v28"/>',
+rug:'<rect x="12" y="20" width="96" height="40" rx="3"/><rect x="22" y="28" width="76" height="24"/>',
+lamp:'<path d="M42 14h36l8 24H34z"/><path d="M60 38v26M44 64h32"/>',
+shelf:'<rect x="26" y="8" width="68" height="58"/><path d="M26 27h68M26 46h68M40 8v19M70 27v19"/>',
+art:'<rect x="28" y="10" width="64" height="48"/><rect x="36" y="18" width="48" height="32"/><path d="M36 50l16-16 12 12 8-8 12 12"/>',
+bed:'<rect x="14" y="30" width="92" height="22" rx="3"/><path d="M14 18v46M106 38v26"/><rect x="22" y="22" width="26" height="10" rx="3"/>',
+nightstand:'<rect x="34" y="20" width="52" height="38"/><path d="M34 39h52M60 29v0M60 48v0M42 58v8M78 58v8"/>',
+dresser:'<rect x="18" y="14" width="84" height="46"/><path d="M18 29h84M18 45h84M52 21h16M52 37h16M52 52h16M28 60v6M92 60v6"/>',
+diningtable:'<rect x="14" y="24" width="92" height="8" rx="2"/><path d="M24 32v32M96 32v32"/>',
+diningchair:'<path d="M42 10v32M42 42h36M78 42v22M42 42v22M42 24h28"/>',
+desk:'<rect x="12" y="26" width="96" height="6" rx="2"/><path d="M20 32v32M100 32v32"/><rect x="62" y="32" width="38" height="20"/>',
+deskchair:'<rect x="40" y="10" width="40" height="26" rx="6"/><path d="M48 36h24v10H48zM60 46v12M44 64l16-6 16 6"/>'
+};
+const svg=c=>'<svg viewBox="0 0 120 72" aria-hidden="true">'+ICON[c]+'</svg>';
+const IDEAS=["Calm Scandinavian with light wood","Sleek modern, black and white","Warm rustic farmhouse","Elegant luxury with marble","Industrial loft","Airy coastal retreat"];
+const $=id=>document.getElementById(id);
+let budget=0,liked=new Set(),passed=new Set(),shown=[],notes={};
+const esc=s=>s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function setNote(id,i,v){(notes[id]=notes[id]||["","",""])[i]=v;update()}
+const money=n=>"$"+Math.round(n).toLocaleString("en-US");
+
+IDEAS.forEach(t=>{const b=document.createElement("button");b.type="button";b.textContent=t;b.onclick=()=>{$("theme").value=t};$("chips").appendChild(b)});
+
+function themeScores(txt){
+  const s={},t=txt.toLowerCase();
+  for(const k in KEY){s[k]=0;KEY[k].split(" ").forEach(w=>{if(t.includes(w))s[k]+=2});if(t.includes(STY[k].toLowerCase()))s[k]+=3}
+  return s;
+}
+$("f").addEventListener("submit",e=>{
+  e.preventDefault();
+  budget=Math.max(300,+$("budget").value||0);
+  const room=ROOMS[$("room").value];
+  let sc=themeScores($("theme").value),matched=Object.keys(sc).filter(k=>sc[k]>0);
+  let fallback=!matched.length;
+  if(fallback){sc.mo=2;sc.mi=2;matched=["mo","mi"]}
+  liked.clear();passed.clear();shown=[];notes={};
+  const out=$("cats");out.innerHTML="";
+  Object.entries(room.w).forEach(([cat,w])=>{
+    const share=budget*w;
+    let opts=D.filter(d=>d.cat===cat).map(d=>({d,score:d.st.reduce((a,k)=>a+(sc[k]||0),0),fit:d.price<=share*1.2}));
+    let ok=opts.filter(o=>o.fit);
+    if(!ok.length)ok=[opts.sort((a,b)=>a.d.price-b.d.price)[0]];
+    ok.sort((a,b)=>b.score-a.score||Math.abs(a.d.price-share)-Math.abs(b.d.price-share));
+    const pick=ok.slice(0,3).map(o=>o.d);
+    pick.forEach(p=>shown.push(p.id));
+    const sec=document.createElement("div");sec.className="cat";
+    sec.innerHTML='<h3>'+CN[cat]+'<span>about '+money(share)+' of your budget</span></h3><div class="grid">'+pick.map(p=>card(p,share)).join("")+'</div>';
+    out.appendChild(sec);
+  });
+  $("rt").textContent="Your "+room.n+", "+matched.map(k=>STY[k].toLowerCase()).join(" + ")+" style";
+  $("rn").textContent=(fallback?"We didn’t catch a style in your description, so we started with modern and minimalist. Add words like cozy, rustic or luxury to change it. ":"")+"Tap Like or Pass on each piece. We’ll keep a running total against your "+money(budget)+" budget.";
+  $("results").style.display="block";$("bar").style.display="block";$("summary").style.display="none";
+  update();
+  $("results").scrollIntoView();
+});
+function card(p,share){
+  const over=p.price>share*1.2?'<div class="tags">Above this item’s budget share</div>':'';
+  return '<article class="item" id="i'+p.id+'"><div class="pic" style="background:var(--p'+(p.id%6+1)+')">'+svg(p.cat)+'</div><div class="info"><b>'+p.name+'</b><div class="price">'+money(p.price)+'</div><div class="tags">'+p.st.map(k=>STY[k]).join(", ")+'</div>'+over+'</div><div class="acts"><button type="button" aria-pressed="false" onclick="vote('+p.id+',1)">Like</button><button type="button" aria-pressed="false" onclick="vote('+p.id+',0)">Pass</button></div><div class="nrow" hidden><input type="text" maxlength="80" aria-label="Product name you chose" placeholder="Product name (optional)" oninput="setNote('+p.id+',0,this.value)"><input type="text" list="shops" maxlength="40" aria-label="Store" placeholder="Store (optional)" oninput="setNote('+p.id+',1,this.value)"><input type="number" min="0" step="1" inputmode="decimal" aria-label="Actual price in dollars" placeholder="Price (optional)" oninput="setNote('+p.id+',2,this.value)"><small>Blank price uses our estimate of '+money(p.price)+'.</small></div>'+stores(p)+'</article>';
+}
+const SQ={sofa:"sofa",armchair:"accent chair",coffeetable:"coffee table",rug:"area rug",lamp:"lamp",shelf:"bookcase",art:"wall decor",bed:"bed frame",nightstand:"nightstand",dresser:"dresser",diningtable:"dining table",diningchair:"dining chairs",desk:"desk",deskchair:"desk chair"};
+const SHOPS=[["IKEA","https://www.ikea.com/us/en/search/?q="],["Wayfair","https://www.wayfair.com/keyword.php?keyword="],["West Elm","https://www.westelm.com/search/results.html?words="]];
+function stores(p){
+  const q=encodeURIComponent(STY[p.st[0]].toLowerCase()+" "+SQ[p.cat]);
+  return '<div class="store">View similar at: '+SHOPS.map(s=>'<a href="'+s[1]+q+'" target="_blank" rel="noopener noreferrer">'+s[0]+'</a>').join("")+'</div>';
+}
+function vote(id,like){
+  const was=like?liked.has(id):passed.has(id);
+  liked.delete(id);passed.delete(id);
+  if(!was)(like?liked:passed).add(id);
+  const el=$("i"+id),b=el.querySelectorAll("button");
+  el.classList.toggle("liked",liked.has(id));el.classList.toggle("passed",passed.has(id));
+  b[0].setAttribute("aria-pressed",liked.has(id));b[1].setAttribute("aria-pressed",passed.has(id));el.querySelector(".nrow").hidden=!liked.has(id);
+  update();
+}
+function hasPrice(id){return notes[id]&&notes[id][2]!==""&&parseFloat(notes[id][2])>=0}
+function price(id){return hasPrice(id)?parseFloat(notes[id][2]):D[id].price}
+function total(){return [...liked].reduce((a,i)=>a+price(i),0)}
+function update(){
+  const t=total(),pct=Math.min(100,t/budget*100);
+  $("bl").textContent=liked.size+" liked";
+  $("bf").style.width=pct+"%";$("bf").classList.toggle("over",t>budget);
+  $("bt").textContent=t>budget?money(t-budget)+" over your "+money(budget)+" budget":money(t)+" of "+money(budget)+" ("+money(budget-t)+" left)";
+  if($("summary").style.display==="block")summary();
+}
+function summary(){
+  const L=[...liked].map(i=>D[i]);
+  $("plist").innerHTML=L.length?L.map(p=>'<div class="line"><span>'+p.name+' <small>'+CN[p.cat]+'</small>'+(notes[p.id]&&(notes[p.id][0].trim()||notes[p.id][1].trim())?'<br><small>'+esc(notes[p.id][0].trim()||"Product name not added")+(notes[p.id][1].trim()?' at '+esc(notes[p.id][1].trim()):'')+'</small>':'')+'</span><span>'+money(price(p.id))+(hasPrice(p.id)?'':' <small>est.</small>')+' <button type="button" onclick="vote('+p.id+',1)">Remove</button></span></div>').join("")+'<div class="total"><span>Total'+(L.some(p=>!hasPrice(p.id))?' <small>(includes estimates)</small>':'')+'</span><span>'+money(total())+'</span></div><small>'+(total()>budget?money(total()-budget)+" over budget. Remove a piece or raise your budget.":money(budget-total())+" left in your budget.")+'</small>':'<p class="empty">You haven’t liked anything yet. Go back up and tap Like on the pieces you want.</p>';
+}
+$("vb").onclick=()=>{$("summary").style.display="block";summary();$("summary").scrollIntoView()};
+$("tiles").innerHTML=["sofa","bed","lamp","desk"].map((c,i)=>'<div class="pic" style="background:var(--p'+(i+1)+');border-radius:18px">'+svg(c)+'</div>').join("");
+function route(){
+  const h=location.hash==="#design"?"design":"home";
+  $("v-home").hidden=h!=="home";$("v-design").hidden=h!=="design";
+  document.body.classList.toggle("home",h==="home");
+  ["home","design"].forEach(k=>{const a=$("t-"+k);if(k===h)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
+  window.scrollTo(0,0);
+}
+addEventListener("hashchange",route);route();
+</script>
+</body>
+</html>
